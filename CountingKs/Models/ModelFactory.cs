@@ -18,12 +18,12 @@ namespace CountingKs.Models
             };
         }
 
-        public MeasureModel Create(Measure m)
+        public MeasureModel Create(Measure measure)
         {
             return new MeasureModel
             {
-                Description = m.Description,
-                Calories = m.Calories
+                Description = measure.Description,
+                Calories = Math.Round(measure.Calories)
             };
         }
     }
