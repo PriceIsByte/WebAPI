@@ -9,7 +9,10 @@ namespace CountingKs
   {
     public static void Register(HttpConfiguration config)
     {
-        config.Routes.MapHttpRoute(
+        config.MapHttpAttributeRoutes();
+
+        // TODO: remove
+        /*config.Routes.MapHttpRoute(
             name: "Food",
             routeTemplate: "api/nutrition/foods/{foodid}",
             defaults: new { controller = "Foods", foodid = RouteParameter.Optional }
@@ -19,7 +22,7 @@ namespace CountingKs
             name: "Measures",
             routeTemplate: "api/nutrition/foods/{foodid}/measures/{id}",
             defaults: new { controller = "Measures", id = RouteParameter.Optional }
-        );
+        );*/
 
         config.Routes.MapHttpRoute(
             name: "Diaries",

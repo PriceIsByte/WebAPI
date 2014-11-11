@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace CountingKs.Controllers
 {
+    [RoutePrefix("api/nutrition/foods")]
     public class FoodsController : BaseApiController
     {
         public FoodsController(ICountingKsRepository repo) 
@@ -14,7 +15,7 @@ namespace CountingKs.Controllers
         {
 
         }
-
+        [Route("", Name="Food")]
         public IEnumerable<FoodModel> Get(bool includeMeasures = true)
         {
             IQueryable<Food> query;
@@ -35,6 +36,7 @@ namespace CountingKs.Controllers
             return results;
         }
 
+        [Route("{foodid:int}")]
         public FoodModel Get(int foodid)
         {
             return ModelFactory.Create(Repo.GetFood(foodid));
