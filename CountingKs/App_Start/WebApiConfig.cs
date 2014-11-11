@@ -11,8 +11,14 @@ namespace CountingKs
     {
         config.Routes.MapHttpRoute(
             name: "Food",
-            routeTemplate: "api/nutrition/foods/{id}",
-            defaults: new { controller = "Foods", id = RouteParameter.Optional }
+            routeTemplate: "api/nutrition/foods/{foodid}",
+            defaults: new { controller = "Foods", foodid = RouteParameter.Optional }
+        );
+
+        config.Routes.MapHttpRoute(
+            name: "Measures",
+            routeTemplate: "api/nutrition/foods/{foodid}/measures/{id}",
+            defaults: new { controller = "Measures", id = RouteParameter.Optional }
         );
 
         // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

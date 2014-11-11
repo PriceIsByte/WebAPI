@@ -38,9 +38,9 @@ namespace CountingKs.Controllers
             return results;
         }
 
-        public FoodModel Get(int id)
+        public FoodModel Get(int foodid)
         {
-            return _modelFactory.Create(_repo.GetFood(id));
+            return _modelFactory.Create(_repo.GetFood(foodid));
         }
     }
 }
