@@ -1,4 +1,5 @@
 ﻿using CountingKs.Data;
+using CountingKs.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace CountingKs.Controllers
             _repo = repo;
         }
 
-        public object Get()
+        public IEnumerable<Food> Get()
         {
             var result = _repo.GetAllFoods()
                                 .OrderBy(f => f.Description)
