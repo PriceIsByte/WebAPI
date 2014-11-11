@@ -11,6 +11,7 @@ namespace CountingKs.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using CountingKs.Data;
+    using CountingKs.Services;
 
     public static class NinjectWebCommon 
     {
@@ -64,6 +65,7 @@ namespace CountingKs.App_Start
         {
             kernel.Bind<ICountingKsRepository>().To<CountingKsRepository>();
             kernel.Bind<CountingKsContext>().To<CountingKsContext>();
+            kernel.Bind<ICountingKsIdentityService>().To<CountingKsIdentityService>();
         }        
     }
 }
