@@ -9,5 +9,6 @@ namespace CountingKs.Models
     {
         public string Description { get; set; }
         public IEnumerable<MeasureModel> Measures { get; set; }
+        public string URL { get; set; }
     }
 }

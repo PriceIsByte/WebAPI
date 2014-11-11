@@ -7,15 +7,12 @@ using System.Web.Http;
 
 namespace CountingKs.Controllers
 {
-    public class FoodsController : ApiController
+    public class FoodsController : BaseApiController
     {
-        private readonly ICountingKsRepository _repo;
-        private readonly ModelFactory _modelFactory;
-
-        public FoodsController(ICountingKsRepository repo)
+        public FoodsController(ICountingKsRepository repo) 
+            : base(repo)
         {
-            _repo = repo;
-            _modelFactory = new ModelFactory();
+
         }
 
         public IEnumerable<FoodModel> Get(bool includeMeasures = true)
@@ -24,23 +21,23 @@ namespace CountingKs.Controllers
 
             if (includeMeasures)
             {
-                query = _repo.GetAllFoodsWithMeasures();
+                query = Repo.GetAllFoodsWithMeasures();
             }
             else
             {
-                query = _repo.GetAllFoods();
+                query = Repo.GetAllFoods();
             }
 
             var results = query.OrderBy(f => f.Description)
                                 .Take(25)
                                 .ToList()
-                                .Select(f => _modelFactory.Create(f));
+                                .Select(f => ModelFactory.Create(f));
             return results;
         }
 
         public FoodModel Get(int foodid)
         {
-            return _modelFactory.Create(_repo.GetFood(foodid));
+            return ModelFactory.Create(Repo.GetFood(foodid));
         }
     }
 }
