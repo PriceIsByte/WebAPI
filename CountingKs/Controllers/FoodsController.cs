@@ -1,4 +1,5 @@
 ﻿using CountingKs.Data;
+using CountingKs.Data.Entities;
 using CountingKs.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,24 @@ namespace CountingKs.Controllers
             _modelFactory = new ModelFactory();
         }
 
-        public IEnumerable<FoodModel> Get()
+        public IEnumerable<FoodModel> Get(bool includeMeasures = true)
         {
-            var result = _repo.GetAllFoodsWithMeasures()
-                                .OrderBy(f => f.Description)
+            IQueryable<Food> query;
+
+            if (includeMeasures)
+            {
+                query = _repo.GetAllFoodsWithMeasures();
+            }
+            else
+            {
+                query = _repo.GetAllFoods();
+            }
+
+            var results = query.OrderBy(f => f.Description)
                                 .Take(25)
                                 .ToList()
                                 .Select(f => _modelFactory.Create(f));
-            return result;
+            return results;
         }
 
         public FoodModel Get(int id)
