@@ -23,13 +23,27 @@ namespace CountingKs.Controllers
 
         public IEnumerable<DiaryModel> Get()
         {
-            var results = Repo.GetDiaries(_identityService.CurrentUser)
+            var username = _identityService.CurrentUser;
+            var results = Repo.GetDiaries(username)
                               .OrderBy(d => d.CurrentDate)
                               .Take(10)
                               .ToList()
                               .Select(d => ModelFactory.Create(d));
 
             return results;
+        }
+
+        public IHttpActionResult Get(DateTime diaryid)
+        {
+            var username = _identityService.CurrentUser;
+            var result = Repo.GetDiary(username, diaryid);
+
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ModelFactory.Create(result));
         }
     }
 }
