@@ -37,5 +37,7 @@ namespace CountingKs.Controllers
 
             return Ok(ModelFactory.Create(result));
         }
+
+
     }
 }
