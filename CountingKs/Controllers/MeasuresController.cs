@@ -30,13 +30,17 @@ namespace CountingKs.Controllers
         }
 
         [Route("measures/{id:int}")]
-        public MeasureModel Get(int foodid, int id)
+        public IHttpActionResult Get(int foodid, int id)
         {
             var result = Repo.GetMeasure(id);
             if (result == null)
-                return null;
+                return NotFound();
+            if (result.Food.Id != foodid)
+                return NotFound();
 
-            return result.Food.Id == foodid ? ModelFactory.Create(result) : null;
+            return Ok(ModelFactory.Create(result));
         }
+
+
     }
 }
